@@ -1,0 +1,61 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(292 284) rotate(90) scale(220)">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shellBody" x1="110" y1="160" x2="532" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFD2FB"/>
+      <stop offset="0.22" stop-color="#D79AEF"/>
+      <stop offset="0.52" stop-color="#B562D5"/>
+      <stop offset="0.76" stop-color="#8A38AE"/>
+      <stop offset="1" stop-color="#61227F"/>
+    </linearGradient>
+    <linearGradient id="shellEdge" x1="118" y1="161" x2="512" y2="464" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9FF"/>
+      <stop offset="1" stop-color="#F1E6F7"/>
+    </linearGradient>
+    <linearGradient id="ringFill" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#D9D9D9"/>
+    </linearGradient>
+    <linearGradient id="mouthShade" x1="371" y1="231" x2="431" y2="448" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A245E"/>
+      <stop offset="1" stop-color="#0B1033"/>
+    </linearGradient>
+    <pattern id="mouthPattern" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(24)">
+      <rect width="22" height="22" fill="url(#mouthShade)"/>
+      <rect width="7" height="22" fill="#2B3D88"/>
+    </pattern>
+    <filter id="shadow" x="54" y="110" width="534" height="432" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="26" stdDeviation="18" flood-color="#082F38" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <ellipse cx="309" cy="473" rx="172" ry="33" fill="#083742" fill-opacity="0.18"/>
+    <path d="M142 311C121 266 119 210 147 172C174 136 218 120 258 122C334 126 386 149 446 189C490 218 534 252 530 311C526 374 492 412 430 437C361 465 247 462 186 429C149 409 136 357 142 311Z" fill="url(#shellEdge)"/>
+    <path d="M154 306C133 265 132 220 156 187C179 156 220 143 261 145C330 148 382 167 438 203C481 230 507 256 505 305C502 363 474 396 421 420C360 448 257 447 202 418C168 400 150 352 154 306Z" fill="url(#shellBody)"/>
+
+    <path d="M202 188C250 162 319 167 386 201C373 178 344 158 304 146C256 132 211 141 178 168C161 182 151 197 147 214C162 203 180 195 202 188Z" fill="#F7DFFC" fill-opacity="0.46"/>
+
+    <path d="M177 290C180 237 211 198 251 177" stroke="#F1CEFF" stroke-opacity="0.54" stroke-width="24" stroke-linecap="round"/>
+    <path d="M214 326C216 266 255 218 306 194" stroke="#E3B9F4" stroke-opacity="0.44" stroke-width="24" stroke-linecap="round"/>
+    <path d="M268 362C270 298 317 245 368 221" stroke="#D197EC" stroke-opacity="0.36" stroke-width="22" stroke-linecap="round"/>
+
+    <path d="M246 219C288 192 343 192 400 224C427 240 442 255 453 279C429 259 400 246 366 240C311 231 265 245 227 282C230 258 235 238 246 219Z" fill="#FFFFFF" fill-opacity="0.12"/>
+
+    <path d="M338 240C369 222 409 220 438 236C463 250 474 277 474 317C474 365 460 398 430 421C391 450 346 454 315 435C282 414 269 380 270 337C270 294 297 264 338 240Z" fill="url(#mouthPattern)"/>
+    <path d="M338 240C369 222 409 220 438 236C463 250 474 277 474 317C474 365 460 398 430 421C391 450 346 454 315 435C282 414 269 380 270 337C270 294 297 264 338 240Z" fill="#0B1033" fill-opacity="0.28"/>
+
+    <path d="M500 289C514 275 537 273 556 281C573 288 586 305 586 325C586 344 576 360 561 370C544 382 519 383 500 370C483 357 472 341 472 323C472 307 482 294 500 289Z" fill="url(#ringFill)"/>
+    <ellipse cx="529" cy="325" rx="36" ry="34" fill="#E8E8E8"/>
+    <ellipse cx="529" cy="325" rx="24" ry="22" fill="#F8F8F8" stroke="#BDE5E7" stroke-width="5"/>
+    <path d="M472 323C467 313 469 301 478 293C485 287 494 286 502 289" stroke="#D9D9D9" stroke-width="10" stroke-linecap="round"/>
+
+    <ellipse cx="241" cy="224" rx="34" ry="23" transform="rotate(-28 241 224)" fill="#FFFFFF" fill-opacity="0.55"/>
+    <ellipse cx="267" cy="192" rx="18" ry="11" transform="rotate(-28 267 192)" fill="#FFFFFF" fill-opacity="0.42"/>
+    <ellipse cx="228" cy="275" rx="145" ry="145" fill="url(#bgGlow)" opacity="0.20"/>
+  </g>
+</svg>
