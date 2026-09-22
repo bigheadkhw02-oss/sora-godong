@@ -1,0 +1,9 @@
+{
+  "name": "마법의 소라고동",
+  "short_name": "소라고동",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f7f88",
+  "theme_color": "#18b8c4",
+  "icons": []
+}
