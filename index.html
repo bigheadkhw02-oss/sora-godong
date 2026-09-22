@@ -2,77 +2,91 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#18b8c4" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#0f9099" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
   <title>마법의 소라고동</title>
 </head>
 <body>
+  <div class="ocean-glow" aria-hidden="true"></div>
+
   <main class="app-shell">
     <header class="topbar">
       <h1>마법의 소라고동</h1>
       <div class="actions">
-        <button id="shareBtn" aria-label="공유">↗</button>
-        <button id="settingsBtn" aria-label="설정">⚙</button>
-        <button id="helpBtn" aria-label="도움말">?</button>
+        <button id="shareBtn" class="icon-btn" aria-label="공유">↗</button>
+        <button id="settingsBtn" class="icon-btn" aria-label="설정">⚙</button>
+        <button id="helpBtn" class="icon-btn" aria-label="도움말">?</button>
       </div>
     </header>
 
     <section class="question-card">
-      <label for="questionInput">소라고동에게 물어보세요</label>
-      <textarea id="questionInput" rows="2" placeholder="예: 오늘 야식 먹어도 될까?"></textarea>
-      <div class="quick-row">
+      <div class="input-wrap">
+        <textarea id="questionInput" rows="2" maxlength="80" placeholder="예: 오늘 야식 먹어도 될까?"></textarea>
+        <button id="clearQuestion" class="clear-question" aria-label="질문 지우기">×</button>
+      </div>
+      <div class="quick-row" id="quickRow">
         <button class="chip" data-q="오늘 이거 해도 될까?">오늘 이거 해도 될까?</button>
         <button class="chip" data-q="지금 결정해도 될까?">지금 결정해도 될까?</button>
+        <button class="chip" data-q="이거 사도 될까?">이거 사도 될까?</button>
       </div>
     </section>
 
-    <section class="conch-zone" id="conchZone">
-      <div class="bubble b1"></div><div class="bubble b2"></div><div class="bubble b3"></div>
-      <button id="conchBtn" class="conch" aria-label="소라고동 당기기">
+    <section class="conch-zone" id="conchZone" aria-label="마법의 소라고동">
+      <div class="bubble b1"></div>
+      <div class="bubble b2"></div>
+      <div class="bubble b3"></div>
+      <div class="bubble b4"></div>
+
+      <button id="conchBtn" class="conch" aria-label="소라고동 누르기">
         <div class="shell-ridges"></div>
         <div class="shell-mouth"></div>
+        <div class="shell-shine"></div>
         <div class="ring">◯</div>
       </button>
-      <div class="rope" id="rope"></div>
-      <div class="hint">소라고동을 누르거나 아래로 당겨보세요</div>
-    </section>
 
-    <section class="answer-card" aria-live="polite">
-      <div class="answer-label">소라고동의 대답</div>
-      <div id="answerText" class="answer-text">질문을 하고 소라고동을 당겨보세요.</div>
-      <div id="categoryBadge" class="badge">대기 중</div>
-    </section>
-
-    <section class="history-card">
-      <div class="history-head">
-        <h2>최근 대답</h2>
-        <button id="clearHistory">지우기</button>
+      <div id="pullCord" class="pull-cord" aria-label="줄 손잡이" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+        <div class="rope"></div>
+        <div class="pull-knob"></div>
+        <div class="pull-threshold">당기기</div>
       </div>
-      <ul id="historyList"></ul>
+    </section>
+
+    <section id="answerCard" class="answer-card" aria-live="polite">
+      <div class="answer-label">소라고동의 대답</div>
+      <div id="answerText" class="answer-text">질문을 하고 소라고동을 눌러보세요.</div>
+      <div id="categoryBadge" class="badge">대기 중</div>
     </section>
   </main>
 
   <dialog id="settingsDialog">
     <form method="dialog" class="dialog-box">
-      <h2>설정</h2>
-      <label><input type="checkbox" id="vibrateToggle" checked> 진동</label>
-      <label><input type="checkbox" id="ttsToggle"> 음성 읽기</label>
-      <label><input type="checkbox" id="chaosToggle"> 혼돈 모드</label>
-      <button>닫기</button>
+      <div class="dialog-title-row">
+        <h2>설정</h2>
+        <button class="dialog-close" aria-label="닫기">×</button>
+      </div>
+      <label class="setting-row"><span>진동</span><input type="checkbox" id="vibrateToggle" checked></label>
+      <label class="setting-row"><span>효과음</span><input type="checkbox" id="soundToggle" checked></label>
+      <label class="setting-row"><span>음성 읽기</span><input type="checkbox" id="ttsToggle"></label>
+      <label class="setting-row"><span>혼돈 모드</span><input type="checkbox" id="chaosToggle"></label>
     </form>
   </dialog>
 
   <dialog id="helpDialog">
     <form method="dialog" class="dialog-box">
-      <h2>사용법</h2>
-      <p>질문을 입력한 뒤 소라고동을 누르거나 아래로 당기면 랜덤 답변이 나옵니다.</p>
-      <p>같은 질문에도 답이 달라질 수 있습니다.</p>
-      <button>닫기</button>
+      <div class="dialog-title-row">
+        <h2>사용법</h2>
+        <button class="dialog-close" aria-label="닫기">×</button>
+      </div>
+      <p>질문을 입력한 뒤 소라고동을 누르거나 줄 손잡이를 아래로 충분히 당겼다가 놓으면 답이 나옵니다.</p>
+      <p>답변은 매번 무작위로 선택됩니다. 설정에서 진동, 효과음, 음성 읽기와 혼돈 모드를 조절할 수 있습니다.</p>
     </form>
   </dialog>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
 </html>
