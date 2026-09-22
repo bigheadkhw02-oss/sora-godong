@@ -1,211 +1,45 @@
 const normalAnswers = [
-  ["그래.","긍정"],["좋아.","긍정"],["해도 돼.","긍정"],["지금 해.","긍정"],["한번 해봐.","긍정"],
-  ["오늘은 괜찮아.","긍정"],["가능성 있어.","긍정"],["그 선택, 나쁘지 않아.","긍정"],["이번엔 가도 돼.","긍정"],["망설이지 마.","긍정"],
-  ["응.","긍정"],["그대로 진행해.","긍정"],["한 번쯤은 괜찮아.","긍정"],["운이 따라줄지도 몰라.","긍정"],["오늘은 네 편이야.","긍정"],
-  ["가도 좋아.","긍정"],["이번 선택 괜찮아.","긍정"],["밀어붙여도 돼.","긍정"],["마음 가는 대로 해.","긍정"],["생각보다 잘 풀릴 거야.","긍정"],
-
-  ["안 돼.","부정"],["하지 마.","부정"],["오늘은 아니야.","부정"],["그건 접어.","부정"],["가능성은 없어.","부정"],
-  ["지금은 멈춰.","부정"],["괜히 건드리지 마.","부정"],["다시 생각해.","부정"],["그 길은 아닌 것 같아.","부정"],["오늘은 참아.","부정"],
-  ["아니.","부정"],["그건 좀 아니다.","부정"],["포기하는 것도 답이야.","부정"],["돈 아껴.","부정"],["지금 사면 후회할지도 몰라.","부정"],
-  ["이번엔 패스해.","부정"],["너무 성급해.","부정"],["지금은 리스크가 커.","부정"],["한 번 더 생각해.","부정"],["오늘은 운이 아니야.","부정"],
-
-  ["아무것도 하지 마.","보류"],["조금 기다려.","보류"],["내일 다시 물어봐.","보류"],["한 시간 뒤에 다시 생각해.","보류"],["아직 때가 아니야.","보류"],
-  ["좀 더 알아보고 결정해.","보류"],["오늘 말고 다음에.","보류"],["일단 보류.","보류"],["지금 결정할 필요 없어.","보류"],["마음이 정리될 때까지 기다려.","보류"],
-  ["조금만 더 지켜봐.","보류"],["신호가 더 필요해.","보류"],["타이밍을 기다려.","보류"],["급할수록 돌아가.","보류"],["지금은 숨 고르기.","보류"],
-
-  ["모르겠어.","애매"],["반반이야.","애매"],["네가 이미 답을 알고 있잖아.","애매"],["왜 나한테 물어봐?","애매"],["질문을 바꿔서 다시 물어봐.","애매"],
-  ["그건 네 선택이야.","애매"],["운명에 맡겨.","애매"],["상황을 좀 더 봐.","애매"],["답이 아직 안 보여.","애매"],["이번엔 내가 침묵할게.","애매"],
-  ["첫 느낌을 믿어봐.","애매"],["어느 쪽이든 나쁘지 않아.","애매"],["너의 직감이 더 정확해.","애매"],["지금 답을 정하기엔 애매해.","애매"],["둘 다 가능성 있어.","애매"],
-
-  ["밥부터 먹고 생각해.","생활"],["일단 자.","생활"],["물 한 잔 마셔.","생활"],["씻고 와.","생활"],["배고프면 판단력이 흐려져.","생활"],
-  ["폰 내려놔.","생활"],["충동구매 금지.","생활"],["카드값부터 확인해.","생활"],["통장 잔고 보고 결정해.","생활"],["내일 아침의 너에게 맡겨.","생활"],
-  ["커피 한 잔 하고 다시 생각해.","생활"],["잠깐 산책하고 와.","생활"],["오늘 할 일부터 끝내.","생활"],["지금 피곤하면 결정하지 마.","생활"],["잠깐 쉬어.","생활"],
-
-  ["연락해.","관계"],["지금은 연락하지 마.","관계"],["먼저 사과해.","관계"],["답장 좀 기다려.","관계"],["그 사람도 생각할 시간이 필요해.","관계"],
-  ["솔직하게 말해.","관계"],["괜히 떠보지 마.","관계"],["읽씹했다고 끝난 건 아니야.","관계"],["전화보단 문자.","관계"],["이번엔 네가 먼저 움직여.","관계"],
-  ["말 돌리지 말고 본론부터.","관계"],["감정 정리하고 이야기해.","관계"],["오늘은 그냥 들어줘.","관계"],["기대치를 조금 낮춰.","관계"],["부드럽게 말해.","관계"],
-
-  ["사.","소비"],["사지 마.","소비"],["장바구니에 하루 넣어둬.","소비"],["중고부터 찾아봐.","소비"],["가격 비교부터 해.","소비"],
-  ["할인할 때 사.","소비"],["필요한 거랑 갖고 싶은 걸 구분해.","소비"],["이건 오래 쓸 것 같으면 사.","소비"],["지금 가진 걸 먼저 써.","소비"],["배송비 아까우면 더 사는 건 금지.","소비"],
-  ["이번 달 예산 안이면 사.","소비"],["비슷한 거 이미 있으면 사지 마.","소비"],["리뷰 세 개만 더 보고 사.","소비"],["급하지 않으면 세일을 기다려.","소비"],["한 달 뒤에도 원하면 사.","소비"],
-
-  ["가.","행동"],["가지 마.","행동"],["일찍 출발해.","행동"],["준비하고 나가.","행동"],["오늘은 집에 있어.","행동"],
-  ["계획 없이 가도 괜찮아.","행동"],["예약부터 해.","행동"],["일단 해보고 판단해.","행동"],["첫 단계만 해.","행동"],["10분만 해봐.","행동"],
-  ["오늘 끝내버려.","행동"],["작게 시작해.","행동"],["미루지 말고 지금 하나만 해.","행동"],["준비가 70%면 출발해.","행동"],["이번엔 직접 부딪혀봐.","행동"]
+  ["그래.","긍정"],["좋아.","긍정"],["해도 돼.","긍정"],["지금 해.","긍정"],["한번 해봐.","긍정"],["오늘은 괜찮아.","긍정"],["가능성 있어.","긍정"],["그대로 진행해.","긍정"],["망설이지 마.","긍정"],["마음 가는 대로 해.","긍정"],
+  ["안 돼.","부정"],["하지 마.","부정"],["오늘은 아니야.","부정"],["그건 접어.","부정"],["지금은 멈춰.","부정"],["다시 생각해.","부정"],["오늘은 참아.","부정"],["이번엔 패스해.","부정"],["너무 성급해.","부정"],["오늘은 운이 아니야.","부정"],
+  ["아무것도 하지 마.","보류"],["조금 기다려.","보류"],["내일 다시 물어봐.","보류"],["아직 때가 아니야.","보류"],["일단 보류.","보류"],["상황을 좀 더 봐.","보류"],["타이밍을 기다려.","보류"],["지금은 숨 고르기.","보류"],
+  ["모르겠어.","애매"],["반반이야.","애매"],["네가 이미 답을 알고 있잖아.","애매"],["그건 네 선택이야.","애매"],["운명에 맡겨.","애매"],["첫 느낌을 믿어봐.","애매"],["너의 직감을 믿어.","애매"],["둘 다 가능성 있어.","애매"],
+  ["밥부터 먹고 생각해.","생활"],["일단 자.","생활"],["물 한 잔 마셔.","생활"],["폰 내려놔.","생활"],["카드값부터 확인해.","생활"],["통장 잔고 보고 결정해.","생활"],["잠깐 산책하고 와.","생활"],["지금 피곤하면 결정하지 마.","생활"],
+  ["연락해.","관계"],["지금은 연락하지 마.","관계"],["먼저 사과해.","관계"],["답장 좀 기다려.","관계"],["솔직하게 말해.","관계"],["괜히 떠보지 마.","관계"],["전화보단 문자.","관계"],["이번엔 네가 먼저 움직여.","관계"],
+  ["사.","소비"],["사지 마.","소비"],["장바구니에 하루 넣어둬.","소비"],["중고부터 찾아봐.","소비"],["가격 비교부터 해.","소비"],["할인할 때 사.","소비"],["비슷한 거 이미 있으면 사지 마.","소비"],["한 달 뒤에도 원하면 사.","소비"],
+  ["가.","행동"],["가지 마.","행동"],["일찍 출발해.","행동"],["예약부터 해.","행동"],["일단 해보고 판단해.","행동"],["첫 단계만 해.","행동"],["10분만 해봐.","행동"],["오늘 끝내버려.","행동"],["작게 시작해.","행동"],["미루지 말고 지금 하나만 해.","행동"]
 ];
 
 const chaosAnswers = [
-  ["소라고동이 지금 파업 중이야.","혼돈"],["질문이 너무 인간적이야.","혼돈"],["일단 냉장고부터 열어봐.","혼돈"],["오늘의 정답은 치킨.","혼돈"],["내가 방금 못 들은 걸로 할게.","혼돈"],
-  ["대답 대신 동전 던지기 추천.","혼돈"],["그건 미래의 네가 알아서 할 문제야.","혼돈"],["5분 뒤의 네 의견도 물어봐.","혼돈"],["가능은 한데 추천은 안 해.","혼돈"],["이 질문은 기록에서 삭제하고 싶다.","혼돈"],
-  ["아마도. 근데 책임은 못 져.","혼돈"],["우주적 관점에서는 별일 아니야.","혼돈"],["배터리 20% 아래면 하지 마.","혼돈"],["비 오는 날이면 다시 물어봐.","혼돈"],["한 번만 더 누르면 답이 바뀔 수도 있어.","혼돈"],
-  ["그냥 가위바위보 하자.","혼돈"],["너 지금 하고 싶은 거지?","혼돈"],["이미 마음속으로 결정했잖아.","혼돈"],["소라고동은 모든 것을 알지만 말해주진 않아.","혼돈"],["질문의 상태가 이상합니다.","혼돈"],
-  ["와이파이 신호가 약해서 답이 흐려.","혼돈"],["이건 소라고동 관할이 아니야.","혼돈"],["지금 답하면 세계선이 바뀔 수 있어.","혼돈"],["인생은 업데이트가 필요해.","혼돈"],["정답은 있지만 비공개야.","혼돈"]
+  ["소라고동이 지금 파업 중이야.","혼돈"],["질문이 너무 인간적이야.","혼돈"],["오늘의 정답은 치킨.","혼돈"],["대답 대신 동전 던지기 추천.","혼돈"],["그건 미래의 네가 알아서 할 문제야.","혼돈"],["아마도. 근데 책임은 못 져.","혼돈"],["우주적 관점에서는 별일 아니야.","혼돈"],["그냥 가위바위보 하자.","혼돈"],["이미 마음속으로 결정했잖아.","혼돈"],["소라고동은 모든 것을 알지만 말해주진 않아.","혼돈"],["정답은 있지만 비공개야.","혼돈"],["오늘은 소라고동도 헷갈려.","혼돈"]
 ];
 
+const $ = s => document.querySelector(s);
 const els = {
-  answer: document.querySelector('#answerText'),
-  answerCard: document.querySelector('#answerCard'),
-  badge: document.querySelector('#categoryBadge'),
-  conch: document.querySelector('#conchBtn'),
-  vibrate: document.querySelector('#vibrateToggle'),
-  sound: document.querySelector('#soundToggle'),
-  tts: document.querySelector('#ttsToggle'),
-  chaos: document.querySelector('#chaosToggle'),
-  toast: document.querySelector('#toast'),
-  installBtn: document.querySelector('#installBtn')
+  conch: $('#conchBtn'), stage: $('.stage'), answer: $('#answerText'), card: $('#answerCard'), badge: $('#categoryBadge'),
+  vibrate: $('#vibrateToggle'), sound: $('#soundToggle'), tts: $('#ttsToggle'), chaos: $('#chaosToggle'),
+  settings: $('#settingsDialog'), installBtn: $('#installBtn'), toast: $('#toast')
 };
 
-const settingsKey = 'magicConchSettingsV4';
-let lastAnswer = '';
-let toastTimer;
-let audioCtx;
-let deferredPrompt = null;
+const settingsKey='magicConchSettingsV5';
+let lastAnswer=''; let toastTimer; let audioCtx; let deferredPrompt=null;
 
-function loadSettings(){
-  try{
-    const saved = JSON.parse(localStorage.getItem(settingsKey) || '{}');
-    if(typeof saved.vibrate === 'boolean') els.vibrate.checked = saved.vibrate;
-    if(typeof saved.sound === 'boolean') els.sound.checked = saved.sound;
-    if(typeof saved.tts === 'boolean') els.tts.checked = saved.tts;
-    if(typeof saved.chaos === 'boolean') els.chaos.checked = saved.chaos;
-  }catch{}
-}
+function loadSettings(){try{const s=JSON.parse(localStorage.getItem(settingsKey)||'{}');['vibrate','sound','tts','chaos'].forEach(k=>{if(typeof s[k]==='boolean') els[k].checked=s[k]})}catch{}}
+function saveSettings(){localStorage.setItem(settingsKey,JSON.stringify({vibrate:els.vibrate.checked,sound:els.sound.checked,tts:els.tts.checked,chaos:els.chaos.checked}))}
+function chooseAnswer(){const pool=els.chaos.checked?normalAnswers.concat(chaosAnswers):normalAnswers;let pick=pool[Math.floor(Math.random()*pool.length)];if(pool.length>1&&pick[0]===lastAnswer)pick=pool[(pool.indexOf(pick)+1+Math.floor(Math.random()*(pool.length-1)))%pool.length];lastAnswer=pick[0];return pick}
+function ctx(){if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); return audioCtx}
+function playSound(){if(!els.sound.checked)return;try{const c=ctx(),now=c.currentTime;[240,360,540].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain(),d=i*.055;o.type=i===2?'sine':'triangle';o.frequency.setValueAtTime(f,now+d);o.frequency.exponentialRampToValueAtTime(f*1.16,now+d+.12);g.gain.setValueAtTime(.0001,now+d);g.gain.exponentialRampToValueAtTime(.06,now+d+.015);g.gain.exponentialRampToValueAtTime(.0001,now+d+.18);o.connect(g).connect(c.destination);o.start(now+d);o.stop(now+d+.19)})}catch{}}
+function toast(t){clearTimeout(toastTimer);els.toast.textContent=t;els.toast.classList.add('show');toastTimer=setTimeout(()=>els.toast.classList.remove('show'),1500)}
+function animate(){els.answer.classList.remove('pop');els.card.classList.remove('flash');els.conch.classList.remove('burst');els.stage.classList.remove('flash');void els.answer.offsetWidth;els.answer.classList.add('pop');els.card.classList.add('flash');els.conch.classList.add('burst');els.stage.classList.add('flash')}
+function ask(){const [text,cat]=chooseAnswer();els.answer.textContent=text;els.badge.textContent=cat;animate();playSound();if(els.vibrate.checked&&navigator.vibrate)navigator.vibrate([50,35,90]);if(els.tts.checked&&'speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ko-KR';u.rate=.94;u.pitch=.92;speechSynthesis.speak(u)}}
 
-function saveSettings(){
-  localStorage.setItem(settingsKey, JSON.stringify({
-    vibrate: els.vibrate.checked,
-    sound: els.sound.checked,
-    tts: els.tts.checked,
-    chaos: els.chaos.checked
-  }));
-}
+els.conch.addEventListener('click',ask);
+[els.vibrate,els.sound,els.tts,els.chaos].forEach(x=>x.addEventListener('change',saveSettings));
+$('#settingsBtn').onclick=()=>els.settings.showModal();
+$('#shareBtn').onclick=async()=>{const t=`소라고동의 대답: ${els.answer.textContent}`;try{if(navigator.share)await navigator.share({title:'마법의 소라고동',text:t,url:location.href});else if(navigator.clipboard){await navigator.clipboard.writeText(`${t}\n${location.href}`);toast('복사했습니다.')}}catch{}};
 
-function chooseAnswer(){
-  const pool = els.chaos.checked ? normalAnswers.concat(chaosAnswers) : normalAnswers;
-  let picked = pool[Math.floor(Math.random() * pool.length)];
-  if(pool.length > 1 && picked[0] === lastAnswer){
-    picked = pool[(pool.indexOf(picked) + 1 + Math.floor(Math.random() * (pool.length - 1))) % pool.length];
-  }
-  lastAnswer = picked[0];
-  return picked;
-}
-
-function getAudioContext(){
-  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  return audioCtx;
-}
-
-function playAnswerSound(){
-  if(!els.sound.checked) return;
-  try{
-    const ctx = getAudioContext();
-    const now = ctx.currentTime;
-    [330, 415, 520].forEach((freq, i) => {
-      const delay = i * 0.07;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = i === 2 ? 'sine' : 'triangle';
-      osc.frequency.setValueAtTime(freq, now + delay);
-      gain.gain.setValueAtTime(0.0001, now + delay);
-      gain.gain.exponentialRampToValueAtTime(0.05, now + delay + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + 0.12);
-      osc.connect(gain).connect(ctx.destination);
-      osc.start(now + delay);
-      osc.stop(now + delay + 0.13);
-    });
-  }catch{}
-}
-
-function showToast(text){
-  clearTimeout(toastTimer);
-  els.toast.textContent = text;
-  els.toast.classList.add('show');
-  toastTimer = setTimeout(() => els.toast.classList.remove('show'), 1600);
-}
-
-function animateAnswer(){
-  els.answer.classList.remove('pop');
-  els.answerCard.classList.remove('flash');
-  els.conch.classList.remove('wobble');
-  void els.answer.offsetWidth;
-  els.answer.classList.add('pop');
-  els.answerCard.classList.add('flash');
-  els.conch.classList.add('wobble');
-}
-
-function askConch(){
-  const [text, category] = chooseAnswer();
-  els.answer.textContent = text;
-  els.badge.textContent = category;
-  animateAnswer();
-  playAnswerSound();
-
-  if(els.vibrate.checked && navigator.vibrate){
-    navigator.vibrate([45, 30, 75]);
-  }
-
-  if(els.tts.checked && 'speechSynthesis' in window){
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'ko-KR';
-    u.rate = 0.94;
-    u.pitch = 0.92;
-    speechSynthesis.speak(u);
-  }
-}
-
-function canInstall(){
-  return deferredPrompt !== null;
-}
-
-function updateInstallButton(){
-  els.installBtn.classList.toggle('hidden', !canInstall());
-}
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  updateInstallButton();
-});
-
-window.addEventListener('appinstalled', () => {
-  deferredPrompt = null;
-  updateInstallButton();
-  showToast('설치가 완료되었습니다.');
-});
-
-els.conch.addEventListener('click', askConch);
-[els.vibrate, els.sound, els.tts, els.chaos].forEach(el => el.addEventListener('change', saveSettings));
-
-document.querySelector('#settingsBtn').onclick = () => document.querySelector('#settingsDialog').showModal();
-document.querySelector('#helpBtn').onclick = () => document.querySelector('#helpDialog').showModal();
-
-document.querySelector('#shareBtn').onclick = async () => {
-  const text = `소라고동의 대답: ${els.answer.textContent}`;
-  const data = { title:'마법의 소라고동', text, url:location.href };
-  try{
-    if(navigator.share){
-      await navigator.share(data);
-    }else if(navigator.clipboard){
-      await navigator.clipboard.writeText(`${text}\n${location.href}`);
-      showToast('복사했습니다.');
-    }
-  }catch{}
-};
-
-els.installBtn.onclick = async () => {
-  if(!deferredPrompt){
-    showToast('브라우저 메뉴에서 홈 화면에 추가를 눌러 설치하세요.');
-    return;
-  }
-  deferredPrompt.prompt();
-  try{
-    await deferredPrompt.userChoice;
-  }catch{}
-  deferredPrompt = null;
-  updateInstallButton();
-};
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;els.installBtn.classList.remove('hidden')});
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;els.installBtn.classList.add('hidden');toast('설치가 완료되었습니다.')});
+els.installBtn.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();try{await deferredPrompt.userChoice}catch{}deferredPrompt=null;els.installBtn.classList.add('hidden')};
 
 loadSettings();
-updateInstallButton();
-if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}))}
