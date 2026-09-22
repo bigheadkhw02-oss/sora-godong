@@ -26,13 +26,21 @@
       <button id="settingsBtn" class="icon-btn" aria-label="설정">⚙</button>
     </header>
 
+    <nav class="topic-bar" aria-label="질문 주제 선택">
+      <button class="topic-chip active" data-topic="all">전체</button>
+      <button class="topic-chip" data-topic="love">연애</button>
+      <button class="topic-chip" data-topic="money">돈·소비</button>
+      <button class="topic-chip" data-topic="work">일·결정</button>
+      <button class="topic-chip" data-topic="life">생활</button>
+      <button class="topic-chip" data-topic="action">행동</button>
+    </nav>
+
     <section class="stage" aria-label="마법의 소라고동">
       <div class="energy-ring ring-a"></div>
       <div class="energy-ring ring-b"></div>
       <div class="energy-ring ring-c"></div>
       <div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div>
       <div class="spark s4"></div><div class="spark s5"></div><div class="spark s6"></div>
-      <div class="spark s7"></div><div class="spark s8"></div>
 
       <button id="conchBtn" class="conch-btn" aria-label="소라고동 터치">
         <span class="conch-aura"></span>
@@ -43,7 +51,7 @@
     <section id="answerCard" class="answer-card" aria-live="polite">
       <div class="answer-label">소라고동의 대답</div>
       <div id="answerText" class="answer-text">소라고동을 터치해보세요.</div>
-      <div id="categoryBadge" class="badge">대기 중</div>
+      <div id="categoryBadge" class="badge">전체</div>
     </section>
   </main>
 
