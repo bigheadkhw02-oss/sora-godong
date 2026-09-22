@@ -20,22 +20,62 @@ const els = {
   settings: $('#settingsDialog'), installBtn: $('#installBtn'), toast: $('#toast')
 };
 
-const settingsKey='magicConchSettingsV5';
+const settingsKey='magicConchSettingsV6';
 let lastAnswer=''; let toastTimer; let audioCtx; let deferredPrompt=null;
 
-function loadSettings(){try{const s=JSON.parse(localStorage.getItem(settingsKey)||'{}');['vibrate','sound','tts','chaos'].forEach(k=>{if(typeof s[k]==='boolean') els[k].checked=s[k]})}catch{}}
-function saveSettings(){localStorage.setItem(settingsKey,JSON.stringify({vibrate:els.vibrate.checked,sound:els.sound.checked,tts:els.tts.checked,chaos:els.chaos.checked}))}
-function chooseAnswer(){const pool=els.chaos.checked?normalAnswers.concat(chaosAnswers):normalAnswers;let pick=pool[Math.floor(Math.random()*pool.length)];if(pool.length>1&&pick[0]===lastAnswer)pick=pool[(pool.indexOf(pick)+1+Math.floor(Math.random()*(pool.length-1)))%pool.length];lastAnswer=pick[0];return pick}
+function loadSettings(){
+  try{
+    const s=JSON.parse(localStorage.getItem(settingsKey)||'{}');
+    ['vibrate','sound','tts','chaos'].forEach(k=>{if(typeof s[k]==='boolean') els[k].checked=s[k]});
+  }catch{}
+}
+function saveSettings(){
+  localStorage.setItem(settingsKey,JSON.stringify({vibrate:els.vibrate.checked,sound:els.sound.checked,tts:els.tts.checked,chaos:els.chaos.checked}));
+}
+function chooseAnswer(){
+  const pool=els.chaos.checked?normalAnswers.concat(chaosAnswers):normalAnswers;
+  let pick=pool[Math.floor(Math.random()*pool.length)];
+  if(pool.length>1&&pick[0]===lastAnswer) pick=pool[(pool.indexOf(pick)+1+Math.floor(Math.random()*(pool.length-1)))%pool.length];
+  lastAnswer=pick[0];
+  return pick;
+}
 function ctx(){if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); return audioCtx}
-function playSound(){if(!els.sound.checked)return;try{const c=ctx(),now=c.currentTime;[240,360,540].forEach((f,i)=>{const o=c.createOscillator(),g=c.createGain(),d=i*.055;o.type=i===2?'sine':'triangle';o.frequency.setValueAtTime(f,now+d);o.frequency.exponentialRampToValueAtTime(f*1.16,now+d+.12);g.gain.setValueAtTime(.0001,now+d);g.gain.exponentialRampToValueAtTime(.06,now+d+.015);g.gain.exponentialRampToValueAtTime(.0001,now+d+.18);o.connect(g).connect(c.destination);o.start(now+d);o.stop(now+d+.19)})}catch{}}
+function playSound(){
+  if(!els.sound.checked)return;
+  try{
+    const c=ctx(),now=c.currentTime;
+    [260,390,585].forEach((f,i)=>{
+      const o=c.createOscillator(),g=c.createGain(),d=i*.055;
+      o.type=i===2?'sine':'triangle';
+      o.frequency.setValueAtTime(f,now+d);o.frequency.exponentialRampToValueAtTime(f*1.17,now+d+.12);
+      g.gain.setValueAtTime(.0001,now+d);g.gain.exponentialRampToValueAtTime(.06,now+d+.015);g.gain.exponentialRampToValueAtTime(.0001,now+d+.18);
+      o.connect(g).connect(c.destination);o.start(now+d);o.stop(now+d+.19);
+    });
+  }catch{}
+}
 function toast(t){clearTimeout(toastTimer);els.toast.textContent=t;els.toast.classList.add('show');toastTimer=setTimeout(()=>els.toast.classList.remove('show'),1500)}
-function animate(){els.answer.classList.remove('pop');els.card.classList.remove('flash');els.conch.classList.remove('burst');els.stage.classList.remove('flash');void els.answer.offsetWidth;els.answer.classList.add('pop');els.card.classList.add('flash');els.conch.classList.add('burst');els.stage.classList.add('flash')}
-function ask(){const [text,cat]=chooseAnswer();els.answer.textContent=text;els.badge.textContent=cat;animate();playSound();if(els.vibrate.checked&&navigator.vibrate)navigator.vibrate([50,35,90]);if(els.tts.checked&&'speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ko-KR';u.rate=.94;u.pitch=.92;speechSynthesis.speak(u)}}
+function animate(){
+  els.answer.classList.remove('pop');els.card.classList.remove('flash');els.conch.classList.remove('burst');els.stage.classList.remove('flash');
+  void els.answer.offsetWidth;
+  els.answer.classList.add('pop');els.card.classList.add('flash');els.conch.classList.add('burst');els.stage.classList.add('flash');
+}
+function ask(){
+  const [text,cat]=chooseAnswer();
+  els.answer.textContent=text;els.badge.textContent=cat;animate();playSound();
+  if(els.vibrate.checked&&navigator.vibrate) navigator.vibrate([50,35,90]);
+  if(els.tts.checked&&'speechSynthesis'in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='ko-KR';u.rate=.94;u.pitch=.92;speechSynthesis.speak(u)}
+}
 
 els.conch.addEventListener('click',ask);
 [els.vibrate,els.sound,els.tts,els.chaos].forEach(x=>x.addEventListener('change',saveSettings));
 $('#settingsBtn').onclick=()=>els.settings.showModal();
-$('#shareBtn').onclick=async()=>{const t=`소라고동의 대답: ${els.answer.textContent}`;try{if(navigator.share)await navigator.share({title:'마법의 소라고동',text:t,url:location.href});else if(navigator.clipboard){await navigator.clipboard.writeText(`${t}\n${location.href}`);toast('복사했습니다.')}}catch{}};
+$('#shareBtn').onclick=async()=>{
+  const t=`소라고동의 대답: ${els.answer.textContent}`;
+  try{
+    if(navigator.share) await navigator.share({title:'마법의 소라고동',text:t,url:location.href});
+    else if(navigator.clipboard){await navigator.clipboard.writeText(`${t}\n${location.href}`);toast('복사했습니다.')}
+  }catch{}
+};
 
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;els.installBtn.classList.remove('hidden')});
 window.addEventListener('appinstalled',()=>{deferredPrompt=null;els.installBtn.classList.add('hidden');toast('설치가 완료되었습니다.')});

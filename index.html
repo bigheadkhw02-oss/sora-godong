@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
-  <meta name="theme-color" content="#083f49" />
+  <meta name="theme-color" content="#073f49" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="마법의 소라고동" />
@@ -17,29 +17,32 @@
 <body>
   <main class="app-shell">
     <header class="topbar">
-      <h1>마법의 소라고동</h1>
-      <div class="actions">
-        <button id="installBtn" class="icon-btn hidden" aria-label="설치">↓</button>
-        <button id="settingsBtn" class="icon-btn" aria-label="설정">⚙</button>
+      <div class="title-wrap" aria-label="마법의 소라고동">
+        <span class="title-spark left">✦</span>
+        <h1>마법의 소라고동</h1>
+        <span class="title-spark right">✦</span>
+        <div class="title-ornament" aria-hidden="true"><span>❦</span></div>
       </div>
+      <button id="settingsBtn" class="icon-btn" aria-label="설정">⚙</button>
     </header>
 
     <section class="stage" aria-label="마법의 소라고동">
       <div class="energy-ring ring-a"></div>
       <div class="energy-ring ring-b"></div>
+      <div class="energy-ring ring-c"></div>
       <div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div>
       <div class="spark s4"></div><div class="spark s5"></div><div class="spark s6"></div>
+      <div class="spark s7"></div><div class="spark s8"></div>
 
       <button id="conchBtn" class="conch-btn" aria-label="소라고동 터치">
         <span class="conch-aura"></span>
-        <img src="conch-shell.svg" alt="보라색 소라고동" class="conch-image" />
+        <img src="conch.png" alt="마법의 소라고동" class="conch-image" />
       </button>
-      <div class="tap-text">TAP</div>
     </section>
 
     <section id="answerCard" class="answer-card" aria-live="polite">
       <div class="answer-label">소라고동의 대답</div>
-      <div id="answerText" class="answer-text">터치해보세요.</div>
+      <div id="answerText" class="answer-text">소라고동을 터치해보세요.</div>
       <div id="categoryBadge" class="badge">대기 중</div>
     </section>
   </main>
@@ -54,7 +57,8 @@
       <label class="setting-row"><span>효과음</span><input type="checkbox" id="soundToggle" checked></label>
       <label class="setting-row"><span>음성 읽기</span><input type="checkbox" id="ttsToggle"></label>
       <label class="setting-row"><span>혼돈 모드</span><input type="checkbox" id="chaosToggle"></label>
-      <button id="shareBtn" class="secondary-btn" type="button">결과 공유</button>
+      <button id="installBtn" class="secondary-btn hidden" type="button">앱 설치</button>
+      <button id="shareBtn" class="secondary-btn alt" type="button">결과 공유</button>
     </form>
   </dialog>
 
